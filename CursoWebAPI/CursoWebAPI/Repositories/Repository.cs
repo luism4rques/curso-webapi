@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Resources;
 using System.Threading.Tasks;
 using CursoWebAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -32,14 +31,14 @@ namespace CursoWebAPI.Repositories
             await SaveChanges();
         }
 
-        public Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _DbSet.Where(predicate).ToListAsync();
         }
 
         public async Task<TEntity> ObterPorId(Guid id)
-        {   
-            throw new NotImplementedException();
+        {
+            return await _DbSet.FirstOrDefaultAsync(_ => _.Id == id);
         }
 
         public async Task<List<TEntity>> ObterTodos()
