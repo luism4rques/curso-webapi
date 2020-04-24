@@ -55,7 +55,7 @@ namespace CursoWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != fornecedor.Id)
+            if (id != fornecedor.FornecedorId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace CursoWebAPI.Controllers
             _context.Fornecedores.Add(fornecedor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFornecedor", new { id = fornecedor.Id }, fornecedor);
+            return CreatedAtAction("GetFornecedor", new { id = fornecedor.FornecedorId }, fornecedor);
         }
 
         // DELETE: api/Fornecedores/5
@@ -119,7 +119,7 @@ namespace CursoWebAPI.Controllers
 
         private bool FornecedorExists(Guid id)
         {
-            return _context.Fornecedores.Any(e => e.Id == id);
+            return _context.Fornecedores.Any(e => e.FornecedorId == id);
         }
     }
 }

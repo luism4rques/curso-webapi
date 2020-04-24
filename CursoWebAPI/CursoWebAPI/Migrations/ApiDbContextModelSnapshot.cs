@@ -21,7 +21,7 @@ namespace CursoWebAPI.Migrations
 
             modelBuilder.Entity("CursoWebAPI.Model.Fornecedor", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("FornecedorId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Ativo");
@@ -36,9 +36,38 @@ namespace CursoWebAPI.Migrations
 
                     b.Property<int>("TipoFornecedor");
 
-                    b.HasKey("Id");
+                    b.HasKey("FornecedorId");
 
-                    b.ToTable("Fornecedores");
+                    b.ToTable("Fornecedores","CursoWebAPI");
+                });
+
+            modelBuilder.Entity("CursoWebAPI.Model.Produto", b =>
+                {
+                    b.Property<Guid>("ProdutoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<Guid>("FornecedorId");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ProdutoId");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.ToTable("Produtos","CursoWebAPI");
+                });
+
+            modelBuilder.Entity("CursoWebAPI.Model.Produto", b =>
+                {
+                    b.HasOne("CursoWebAPI.Model.Fornecedor", "Fornecedor")
+                        .WithMany("Produtos")
+                        .HasForeignKey("FornecedorId");
                 });
 #pragma warning restore 612, 618
         }
