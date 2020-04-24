@@ -4,12 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CursoWebAPI.Model
+namespace CursoWebAPI.Models
 {
-    public class Fornecedor
+    public class Fornecedor : Entity
     {
-        public Guid FornecedorId { get; set; }
-
         public string Nome { get; set; }
 
         public string Documento { get; set; }

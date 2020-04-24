@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CursoWebAPI.Model
+namespace CursoWebAPI.Models
 {
-    public class Produto
+    public class Produto : Entity
     {
-        public Guid ProdutoId { get; set; }
-
         public string Nome { get; set; }
 
         public string Descricao { get; set; }

@@ -1,8 +1,9 @@
 ﻿using CursoWebAPI.Mappings;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using CursoWebAPI.Models;
 
-namespace CursoWebAPI.Model
+namespace CursoWebAPI.Models
 {
     public class ApiDbContext : DbContext
     {

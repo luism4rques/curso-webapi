@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CursoWebAPI.Model;
+using CursoWebAPI.Models;
 
 namespace CursoWebAPI.Controllers
 {
@@ -55,7 +55,7 @@ namespace CursoWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != fornecedor.FornecedorId)
+            if (id != fornecedor.Id)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace CursoWebAPI.Controllers
             _context.Fornecedores.Add(fornecedor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFornecedor", new { id = fornecedor.FornecedorId }, fornecedor);
+            return CreatedAtAction("GetFornecedor", new { id = fornecedor.Id }, fornecedor);
         }
 
         // DELETE: api/Fornecedores/5
@@ -119,7 +119,7 @@ namespace CursoWebAPI.Controllers
 
         private bool FornecedorExists(Guid id)
         {
-            return _context.Fornecedores.Any(e => e.FornecedorId == id);
+            return _context.Fornecedores.Any(e => e.Id == id);
         }
     }
 }
