@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CursoWebAPI.Models;
+using CursoWebAPI.ViewModels;
+using AutoMapper;
 
 namespace CursoWebAPI.Controllers
 {
@@ -14,10 +16,12 @@ namespace CursoWebAPI.Controllers
     public class FornecedoresController : ControllerBase
     {
         private readonly ApiDbContext _context;
+        private readonly IMapper _mapper;
 
-        public FornecedoresController(ApiDbContext context)
+        public FornecedoresController(ApiDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Fornecedores
@@ -83,12 +87,14 @@ namespace CursoWebAPI.Controllers
 
         // POST: api/Fornecedores
         [HttpPost]
-        public async Task<IActionResult> PostFornecedor([FromBody] Fornecedor fornecedor)
+        public async Task<IActionResult> PostFornecedor([FromBody] FornecedorViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var fornecedor = _mapper.Map<Fornecedor>(vm);
 
             _context.Fornecedores.Add(fornecedor);
             await _context.SaveChangesAsync();
