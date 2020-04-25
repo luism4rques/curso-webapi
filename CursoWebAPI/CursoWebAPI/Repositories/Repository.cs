@@ -11,9 +11,9 @@ namespace CursoWebAPI.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
         protected readonly DbSet<TEntity> _DbSet;
-        protected readonly DbContext _DbContext;
+        protected readonly ApiDbContext _DbContext;
 
-        protected Repository(DbContext dbContext)
+        protected Repository(ApiDbContext dbContext)
         {
             _DbContext = dbContext;
             _DbSet = dbContext.Set<TEntity>();
